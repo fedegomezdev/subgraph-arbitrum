@@ -2,7 +2,7 @@ specVersion: 0.0.2
 description: Tokens in arbitrum
 repository: https://github.com/fedegomezdev/arbitrum-tokens
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: wbtc
@@ -21,11 +21,11 @@ dataSources:
         - Balance
       abis:
         - name: WBTC
-          file: ./abis/WBTC.json
+          file: wbtc\abis\WBTC.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleWbtcTransfer
-      file: ./src/mapping.ts
+      file: wbtc\wbtc.wasm
   - kind: ethereum/contract
     name: weth
     network: arbitrum-one
@@ -43,11 +43,11 @@ dataSources:
         - Balance
       abis:
         - name: WETH
-          file: ./abis/WETH.json
+          file: weth\abis\WETH.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleWethTransfer
-      file: ./src/mapping.ts
+      file: wbtc\wbtc.wasm
   - kind: ethereum/contract
     name: usdc
     network: arbitrum-one
@@ -65,8 +65,8 @@ dataSources:
         - Balance
       abis:
         - name: USDC
-          file: ./abis/USDC.json
+          file: usdc\abis\USDC.json
       eventHandlers:
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleUsdcTransfer
-      file: ./src/mapping.ts
+      file: wbtc\wbtc.wasm
