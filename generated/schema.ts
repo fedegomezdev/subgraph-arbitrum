@@ -119,6 +119,8 @@ export class Balance extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
+
+    this.set("balance", Value.fromBigInt(BigInt.zero()));
   }
 
   save(): void {
@@ -181,8 +183,71 @@ export class Balance extends Entity {
     }
   }
 
-  get balance(): BigInt | null {
+  get balance(): BigInt {
     let value = this.get("balance");
+    return value!.toBigInt();
+  }
+
+  set balance(value: BigInt) {
+    this.set("balance", Value.fromBigInt(value));
+  }
+}
+
+export class Trasnfer extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("from", Value.fromString(""));
+    this.set("to", Value.fromString(""));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Trasnfer entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save Trasnfer entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("Trasnfer", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Trasnfer | null {
+    return changetype<Trasnfer | null>(store.get("Trasnfer", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get from(): string {
+    let value = this.get("from");
+    return value!.toString();
+  }
+
+  set from(value: string) {
+    this.set("from", Value.fromString(value));
+  }
+
+  get to(): string {
+    let value = this.get("to");
+    return value!.toString();
+  }
+
+  set to(value: string) {
+    this.set("to", Value.fromString(value));
+  }
+
+  get value(): BigInt | null {
+    let value = this.get("value");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
@@ -190,11 +255,11 @@ export class Balance extends Entity {
     }
   }
 
-  set balance(value: BigInt | null) {
+  set value(value: BigInt | null) {
     if (!value) {
-      this.unset("balance");
+      this.unset("value");
     } else {
-      this.set("balance", Value.fromBigInt(<BigInt>value));
+      this.set("value", Value.fromBigInt(<BigInt>value));
     }
   }
 }

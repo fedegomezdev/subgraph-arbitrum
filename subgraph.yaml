@@ -30,7 +30,7 @@ dataSources:
     name: weth
     network: arbitrum-one
     source:
-      address: "0x8b194bEae1d3e0788A1a35173978001ACDFba668"
+      address: "0x82af49447d8a07e3bd95bd0d56f35241523fbab1"
       abi: WETH
       startBlock: 21774
     mapping:
@@ -52,7 +52,7 @@ dataSources:
     name: usdc
     network: arbitrum-one
     source:
-      address: "0x1eFB3f88Bc88f03FD1804A5C53b7141bbEf5dED8"
+      address: "0xff970a61a04b1ca14834a43f5de4533ebddb5cc8"
       abi: USDC
       startBlock: 5430
     mapping:

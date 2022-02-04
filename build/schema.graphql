@@ -10,9 +10,16 @@ type Token @entity {
 }
 
 type Balance @entity {
-  "user address + token address "
+  "user address - token address "
   id: ID!
   user: User
   token: Token
-  balance: BigInt
+  balance: BigInt!
+}
+
+type Trasnfer @entity {
+  id: ID!
+  from: User!
+  to: User!
+  value: BigInt
 }
